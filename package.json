@@ -1,0 +1,28 @@
+{
+  "name": "bitotal_react_project",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "highcharts": "^6.0.3",
+    "jquery": "^3.2.1",
+    "material-ui": "^0.20.0",
+    "rc-table": "^6.1.0",
+    "react": "^16.2.0",
+    "react-axios": "^2.0.0",
+    "react-dom": "^16.2.0",
+    "react-export": "0.0.0",
+    "react-highstock": "^1.0.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.17",
+    "react-table": "^6.7.4",
+    "react-tap-event-plugin": "^3.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

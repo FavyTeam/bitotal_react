@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+    <script src="./main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+    <script type="text/javascript">
+        $.getJSON('https://min-api.cryptocompare.com/data/histohour?fsym=BTC&tsym=USD&limit=2000&aggregate=3&e=CCCAGG', function (data) {
+            // parse data
+            var stockdata = [];
+            for (var i = 0; i < data["Data"].length; i++) {
+                var unitData = data["Data"][i];
+                var unitStockData = [];
+                unitStockData.push(unitData["time"]);//.toString().concat("000"));
+                unitStockData.push(unitData["open"]);
+                unitStockData.push(unitData["high"]);
+                unitStockData.push(unitData["low"]);
+                unitStockData.push(unitData["close"]);
+                stockdata.push(unitStockData);
+            }
+            // create the chart
+            Highcharts.stockChart('hour-container', {
+                rangeSelector: {
+                    selected: 1,
+                    inputEnabled: false,
+                    buttonTheme: {
+                        visibility: 'hidden'
+                    },
+                    labelStyle: {
+                        visibility: 'hidden'
+                    }
+                },
+                title: {
+                    text: 'Cryptocompare Stock Price By Hour'
+                },
+                plotOptions: {
+                    turboThreshold: 2000
+                },
+                series: [{
+                    type: 'candlestick',
+                    name: 'Cryptocompare Stock Price By Hour',
+                    data: stockdata,
+                }]
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
